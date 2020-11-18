@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {Context as AuthContext} from '../context/AuthContext'
 import {View, StyleSheet} from 'react-native';
-import {Text} from 'react-native-elements'
+import AuthForm from '../components/AuthForm'
+import NavLink from '../components/NavLink'
 
 const SigninScreen = ({navigation}) => {
+  const {state, signin} = useContext(AuthContext)
   return (
     <View>
-      <Text>SigninScreen</Text>
+      <AuthForm onSubmit={({email, password}) => signin({email, password})} buttonText="Sign in" />
+      <NavLink navigateTo="Signup" message="Need an account? Click here to sign up." />
     </View>
   )
 }
