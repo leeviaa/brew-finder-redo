@@ -5,7 +5,6 @@ import {useNavigation} from '@react-navigation/native'
 
 const NavLink = ({message, navigateTo}) => {
   const navigation = useNavigation();
-  console.log(navigation)
   return (
     <>
       <TouchableOpacity onPress={() => navigation.navigate(navigateTo)}>

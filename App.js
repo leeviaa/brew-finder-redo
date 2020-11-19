@@ -7,6 +7,7 @@ import SigninScreen from './src/screens/SigninScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
 import {Provider as AuthProvider, Context as AuthContext} from './src/context/AuthContext'
 import { navigationRef } from './src/navigationRef'
+import {Provider as ResultsProvider} from './src/context/ResultsContext';
 
 
 
@@ -19,11 +20,12 @@ import { navigationRef } from './src/navigationRef'
     //3) STACK NAV FOR DETAILS
 const App = () => {
   const {state: {token}} = useContext(AuthContext);
-  console.log(token)
 
   return (
     
-    <Stack.Navigator>
+    <Stack.Navigator
+    headerMode="none"
+    >
       <Stack.Screen name="ResolveAuth" component={ResolveAuthScreen} />
       {token === null || undefined ? (
         <>
@@ -52,9 +54,12 @@ const App = () => {
 export default () => {
   return (
     <AuthProvider>
-      <NavigationContainer ref={navigationRef}>
+     <ResultsProvider>
+     <NavigationContainer ref={navigationRef}>
         <App />
       </NavigationContainer>
+     </ResultsProvider>
+      
     </AuthProvider>
   )
 }

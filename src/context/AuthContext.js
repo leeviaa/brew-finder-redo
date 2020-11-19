@@ -1,6 +1,6 @@
 import {AsyncStorage} from 'react-native';
 import createDataContext from './createDataContext'
-import beerApi from '../api/beer';
+import userApi from '../api/user';
 import {navigate} from '../navigationRef'
 
 //build reducer
@@ -43,7 +43,7 @@ const tryLocalSignin = dispatch => async () => {
 
 const signup = dispatch => async({email, password}) => {
   try {
-    const res = await beerApi.post('/signup', {email, password}) //res.data returns token
+    const res = await userApi.post('/signup', {email, password}) //res.data returns token
     //put token in local storage for easier log in
     await AsyncStorage.setItem('token', res.data.token)
     dispatch({type: 'signup', payload: res.data.token})
@@ -56,10 +56,9 @@ const signup = dispatch => async({email, password}) => {
 const signin = dispatch => async({email, password}) => {
   try {
 
-    const res = await beerApi.post('/signin', {email, password}) //res.data returns token
+    const res = await userApi.post('/signin', {email, password}) //res.data returns token
      //put token in local storage for easier log in
      await AsyncStorage.setItem('token', res.data.token)
-     console.log(res)
      //dispatch action with token as payload
     dispatch({type: 'signin', payload: res.data.token})
     navigate('TabNavigator', { screen: 'Favorites'})

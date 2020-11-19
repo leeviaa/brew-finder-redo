@@ -1,16 +1,19 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AccountScreen from '../screens/AccountScreen';
-import BeerLocatorScreen from '../screens/BeerLocatorScreen';
+import DetailsNavigator from './DetailsNavigator'
+// import BeerLocatorScreen from '../screens/BeerLocatorScreen';
 import SavedBarsScreen from '../screens/SavedBarsScreen';
 
 const Tab = createBottomTabNavigator();
+
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-    initialRouteName="Favorites">
+    initialRouteName="Favorites"
+    >
       <Tab.Screen name="Favorites" component={SavedBarsScreen}/>
-      <Tab.Screen name="BeerLocator" component={BeerLocatorScreen} />
+      <Tab.Screen name="BeerLocator" component={DetailsNavigator} />
       <Tab.Screen name="Account" component={AccountScreen} />
     </Tab.Navigator>
   )
