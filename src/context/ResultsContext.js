@@ -1,6 +1,7 @@
 
 import resultsApi from '../api/results'
-import createDataContext from './createDataContext'
+import createDataContext from './createDataContext';
+import userApi from '../api/user';
 
 const resultsReducer = (state, action) => {
   const {type, payload} = action;
@@ -46,6 +47,14 @@ const findResults = dispatch => async (userLocation) => {
      }
    });
    dispatch({type: 'store_results', payload: response.data.businesses})
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+const getUserFavorites = dispatch => async() => {
+  try {
+    
   } catch (e) {
     console.error(e)
   }
