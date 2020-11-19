@@ -24,12 +24,11 @@ const App = () => {
   return (
     
     <Stack.Navigator
-    headerMode="none"
     >
-      <Stack.Screen name="ResolveAuth" component={ResolveAuthScreen} />
+      <Stack.Screen options={{headerShown: false}} name="ResolveAuth" component={ResolveAuthScreen} />
       {token === null || undefined ? (
         <>
-         <Stack.Screen name="Signup" component={SignupScreen} />
+         <Stack.Screen options={{headerShown: false}} name="Signup" component={SignupScreen} />
          <Stack.Screen name="Signin" component={SigninScreen} />
          </>
         ) : (

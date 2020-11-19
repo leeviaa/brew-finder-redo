@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const authRoutes = require('../routes/authRoutes');
 const requireAuth = require('../middlewares/requireAuth')
+const favoriteRoutes = require('../routes/favoriteRoutes')
 
 
 //init express app 
@@ -13,6 +14,8 @@ const app = express();
 app.use(bodyParser.json())
 //use authRoutes
 app.use(authRoutes)
+//use favorite routes
+app.use(favoriteRoutes)
 //set mongo uri
 const mongoUri = 'mongodb+srv://leeviaa:Blue1357!@cluster0.lajwc.mongodb.net/brew-finder?retryWrites=true&w=majority';
 //connect using mongoose
@@ -31,7 +34,7 @@ mongoose.connection.on('error', (err) => {
 })
 //connect whole app to send back hi there response
 app.get('/', requireAuth, (req, res) => {
-  res.send('Hi There!')
+  res.send(`Hi there ${req.user.email}`)
 })
 
 

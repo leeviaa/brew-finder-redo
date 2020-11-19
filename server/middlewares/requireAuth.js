@@ -7,6 +7,7 @@ module.exports = (req, res, next) => {
   //extract auth from header
   const { authorization } = req.headers;
 
+
   //if no auth send error
   if(!authorization) {
     return res.status(404).send({error: 'Must be logged in to view this page'})
@@ -17,12 +18,15 @@ module.exports = (req, res, next) => {
   jwt.verify(token, 'mysecretkey', async (err, payload) => {
      //if err is present send error message
   if(err) {
+
     return res.status(401).send({error: 'You must be logged in. '})
+    
   }
   //else continue
   const {userId} = payload
   //find user
-  const user = User.findById(userId);
+  const user = await User.findById(userId);
+  console.log('FROM REQUIREAUTHFILE', user.email)
   //set req.user to the user in order to have easy access in res of app
   req.user = user;
   next()

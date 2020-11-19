@@ -14,6 +14,12 @@ const {signup} = useContext(AuthContext)
   )
 }
 
+SignupScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
