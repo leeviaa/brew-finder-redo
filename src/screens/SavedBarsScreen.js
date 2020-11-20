@@ -14,14 +14,16 @@ const SavedBarsScreen = ({navigation}) => {
   },[])
 
   return (
-    <>
+    <View style={styles.container}>
    <ResultsList displayFavoriteButton={false} data={userFavorites} />
-   </>
+   </View>
   )
 }
 
 const styles = StyleSheet.create({
-  
+  container: {
+    marginTop: 20
+  }
 });
 
 export default SavedBarsScreen

@@ -36,6 +36,17 @@ const resultsReducer = (state, action) => {
           ...state,
           results: []
         }
+    case 'set_error': 
+        return {
+          ...state,
+          errorMessage: payload
+        }
+     case 'clear_error': {
+      return {
+        ...state,
+        errorMessage: ''
+      }
+     }
     default:
       return state
   }
@@ -68,6 +79,10 @@ const findResults = dispatch => async (userLocation) => {
    });
    dispatch({type: 'store_results', payload: response.data.businesses})
   } catch (e) {
+    dispatch({type: 'set_error', payload: 'Could not find any results matching your request.'})
+    setTimeout(() => {
+      dispatch({type: 'clear_error'})
+    }, 4000)
     console.error(e)
   }
 }
@@ -82,6 +97,10 @@ const getUserFavorites = dispatch => async() => {
 
   } catch (e) {
     console.error(e)
+    dispatch({type: 'set_error', payload: 'Looks like you dont have any favorites yet!'})
+    setTimeout(() => {
+      dispatch({type: 'clear_error'})
+    }, 4000)
   }
 }
 
@@ -100,8 +119,13 @@ const onPressActionIcon = dispatch => async(item, type) => {
       dispatch({type: 'press_delete_action_icon', payload: favoriteToDelete})
     }
   } catch (error) {
+    dispatch({type: 'set_error', payload: 'You might have already favorited this item.'})
+    setTimeout(() => {
+      dispatch({type: 'clear_error'})
+    }, 4000)
+
     return console.error(error.message)
   }
 }
 
-export const {Context, Provider} = createDataContext(resultsReducer, {findResults, clearResults, getUserFavorites, onPressActionIcon}, {results: [], userFavorites: []})
+export const {Context, Provider} = createDataContext(resultsReducer, {findResults, clearResults, getUserFavorites, onPressActionIcon}, {results: [], userFavorites: [], errorMessage: ''})

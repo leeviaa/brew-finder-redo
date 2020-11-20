@@ -72,8 +72,6 @@ const styles = StyleSheet.create({
     color: '#3840c7'
   },
  closeSearchOnTouchContainer: {
-   borderWidth: 1,
-   borderColor: 'red',
    height: 500,
  }
 });

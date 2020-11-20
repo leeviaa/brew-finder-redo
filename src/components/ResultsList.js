@@ -3,10 +3,11 @@ import {View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import ResultCard from './ResultCard';
 import { useNavigation } from '@react-navigation/native';
 import {Context as ResultsContext} from '../context/ResultsContext';
+import AlertPopUp from '../components/AlertPopUp'
 
 const ResultsList = ({data, displayFavoriteButton}) => {
-  const {onPressActionIcon, userFavorites} = useContext(ResultsContext)
-
+  const {onPressActionIcon, state: {errorMessage}} = useContext(ResultsContext)
+  //import nav object to have access to navigation 
     const navigation = useNavigation();
 
     const runActionIcon = (item, type) => {
@@ -15,6 +16,7 @@ const ResultsList = ({data, displayFavoriteButton}) => {
 
   return (
     <View>
+      {errorMessage ? <AlertPopUp message={errorMessage} backgroundColor="#ff3333" textColor="white" /> : null}
       <FlatList
       data={data}
       keyExtractor={(result) => result.id}
