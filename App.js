@@ -21,12 +21,7 @@ import {Provider as ResultsProvider} from './src/context/ResultsContext';
     //3) STACK NAV FOR DETAILS
 const App = () => {
   const {state: {token}} = useContext(AuthContext);
-  const {state: { userFavorites }, getUserFavorites} = useContext(ResultsContext);
-//might need to move this elsewhere, currently running getUserFavorites on app load in order to load them into favorites screen, TEST TO SEE IF THIS WORKS NEED TO REFACTOR
-  useEffect(() => {
-    getUserFavorites()
-  }, [])
-
+  const {state: { userFavorites }} = useContext(ResultsContext);
   return (
     
     <Stack.Navigator
@@ -38,7 +33,7 @@ const App = () => {
          <Stack.Screen name="Signin" component={SigninScreen} />
          </>
         ) : (
-          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen options={{headerShown: false}} name="TabNavigator" component={TabNavigator} />
         )}
         </Stack.Navigator>
         

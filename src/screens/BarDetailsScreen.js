@@ -11,6 +11,7 @@ const BarDetailsScreen = ({route, navigation}) => {
   const [result, setResult] = useState(null)
   //get id from route paramaters
   const  {id }= route.params;
+  console.log('FROM DETAILS SCREEN ROUTE PARAMS',route.params)
   //getResult func to loop through results find the result by id
   const getResult = async (id) => {
     const result = await results.find(result => result.id === id)

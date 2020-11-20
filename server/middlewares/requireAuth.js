@@ -26,7 +26,7 @@ module.exports = (req, res, next) => {
   const {userId} = payload
   //find user
   const user = await User.findById(userId);
-  console.log('FROM REQUIREAUTHFILE', user.email)
+  console.log(user.email)
   //set req.user to the user in order to have easy access in res of app
   req.user = user;
   next()

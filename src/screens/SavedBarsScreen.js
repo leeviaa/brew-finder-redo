@@ -8,12 +8,10 @@ const SavedBarsScreen = ({navigation}) => {
   //extract favorites to display from context
   const {state: {  userFavorites }, getUserFavorites} = useContext(ResultsContext);
   //get updated user favorites on focus
-  navigation.addListener('focus', () => {
+  
+  useEffect(() => {
     getUserFavorites()
-  })
-  // useEffect(() => {
-  //   getUserFavorites()
-  // }, [])
+  },[])
 
   return (
     <>

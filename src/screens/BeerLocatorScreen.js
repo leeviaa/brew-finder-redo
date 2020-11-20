@@ -10,6 +10,7 @@ const BeerLocatorScreen = ({navigation}) => {
   const [displaySearchForm, setDisplaySearchForm] = useState(true)
   const { findResults, state:{ results } } = useContext(ResultsContext);
 
+  //possibly add location finding for search bar later just gonna keep this here
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -53,7 +54,7 @@ const BeerLocatorScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 30,
     padding: 5,
     flex: 1,
   },

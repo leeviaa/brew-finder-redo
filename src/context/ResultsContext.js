@@ -7,6 +7,20 @@ import Axios from 'axios';
 const resultsReducer = (state, action) => {
   const {type, payload} = action;
   switch(type) {
+    case 'press_favorite_action_icon':
+      return {
+        ...state,
+        userFavorites: [payload ,
+          ...state.userFavorites ]
+      }
+    case 'press_delete_action_icon': 
+    //filter through favorites and return all items that are not matching id of the deleted favorite
+    const newFavorites = state.userFavorites.filter(favorite => favorite.id !== payload.id )
+      return {
+        ...state,
+        userFavorites: newFavorites
+         
+      }
     case 'get_favorites':
       return {
         ...state,
@@ -75,17 +89,18 @@ const onPressActionIcon = dispatch => async(item, type) => {
   //get current user favorites to check against them to make sure same one cant be added twice
   try {
     if(type === 'favorite') {
-      const checkForExisting = userFavorites.includes(item)
-      if(checkForExisting) return console.error('You have already added this item')
       const newFavorite = item;
       await userApi.post('/favorites', newFavorite)
+      //dispatch to change state and trigger update
+      dispatch({type: 'press_favorite_action_icon', payload: newFavorite})
     }
     if(type === 'delete') {
-      console.log('deleting....')
+      const favoriteToDelete = item;
+      await userApi.delete('/favorites',  { data: favoriteToDelete})
+      dispatch({type: 'press_delete_action_icon', payload: favoriteToDelete})
     }
-    getUserFavorites();
   } catch (error) {
-    
+    return console.error(error.message)
   }
 }
 

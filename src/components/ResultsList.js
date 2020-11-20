@@ -20,8 +20,8 @@ const ResultsList = ({data, displayFavoriteButton}) => {
       keyExtractor={(result) => result.id}
       renderItem={ ({item}) =>{
         return (
-        <TouchableOpacity onPress={() => navigation.navigate('Details', {id: item.id})}>
-          <ResultCard onDelete={()  => runActionIcon(item, 'delete')}  onFavorite={() => runActionIcon(item, 'favorite')} displayFavoriteButton={displayFavoriteButton} distance={item.distance} name={item.name} imageURL={item.image_url} rating={item.rating} />
+        <TouchableOpacity onPress={() => navigation.navigate('Details', {id: item.id, screen: 'Details'})}>
+          <ResultCard onDelete={() => runActionIcon(item, 'delete')}  onFavorite={() => runActionIcon(item, 'favorite')} displayFavoriteButton={displayFavoriteButton} distance={item.distance} name={item.name} imageURL={item.image_url} rating={item.rating} />
         </TouchableOpacity>
         )
       } }
