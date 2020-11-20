@@ -12,7 +12,8 @@ const TabNavigator = () => {
     <Tab.Navigator
     initialRouteName="Favorites"
     >
-      <Tab.Screen name="Favorites" component={SavedBarsScreen}/>
+      <Tab.Screen name="Favorites" component={SavedBarsScreen}
+      />
       <Tab.Screen name="BeerLocator" component={DetailsNavigator} />
       <Tab.Screen name="Account" component={AccountScreen} />
     </Tab.Navigator>

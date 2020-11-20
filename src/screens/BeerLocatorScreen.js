@@ -18,10 +18,6 @@ const BeerLocatorScreen = ({navigation}) => {
     )
   }
 
-  useEffect(() => {
-    getLocation()
-  }, [])
-
   return (
     <SafeAreaView style={styles.container}>
      {/* if no results, show form, else show resultsList */}
@@ -31,7 +27,7 @@ const BeerLocatorScreen = ({navigation}) => {
             <Icon color="#3840c7" style={styles.plusIcon} name="plus" type="font-awesome"/>
             <Text style={styles.newSearchText}>New Search</Text>
           </TouchableOpacity>
-          <ResultsList data={results} />
+          <ResultsList displayFavoriteButton={true} data={results} />
           </> 
            
          :   <>

@@ -1,11 +1,12 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import TabNavigator from './src/navigators/TabNavigator'
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignupScreen from './src/screens/SignupScreen'
 import SigninScreen from './src/screens/SigninScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
-import {Provider as AuthProvider, Context as AuthContext} from './src/context/AuthContext'
+import {Provider as AuthProvider, Context as AuthContext} from './src/context/AuthContext';
+import {Context as ResultsContext} from './src/context/ResultsContext'
 import { navigationRef } from './src/navigationRef'
 import {Provider as ResultsProvider} from './src/context/ResultsContext';
 
@@ -20,6 +21,11 @@ import {Provider as ResultsProvider} from './src/context/ResultsContext';
     //3) STACK NAV FOR DETAILS
 const App = () => {
   const {state: {token}} = useContext(AuthContext);
+  const {state: { userFavorites }, getUserFavorites} = useContext(ResultsContext);
+//might need to move this elsewhere, currently running getUserFavorites on app load in order to load them into favorites screen, TEST TO SEE IF THIS WORKS NEED TO REFACTOR
+  useEffect(() => {
+    getUserFavorites()
+  }, [])
 
   return (
     

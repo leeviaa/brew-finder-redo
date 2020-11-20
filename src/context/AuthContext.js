@@ -61,6 +61,7 @@ const signin = dispatch => async({email, password}) => {
      await AsyncStorage.setItem('token', res.data.token)
      //dispatch action with token as payload
     dispatch({type: 'signin', payload: res.data.token})
+    console.log(res.data)
     navigate('TabNavigator', { screen: 'Favorites'})
   } catch (e) {
     dispatch({type: 'error', payload: 'Something went wrong.'})
